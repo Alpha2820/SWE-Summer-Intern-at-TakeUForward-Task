@@ -36,9 +36,18 @@ import {
 } from "date-fns";
 
 export default function PerfectWallCalendar() {
+  // LocalStorage: Load saved notes on mount
+  const [savedNotes, setSavedNotes] = useState(() => {
+    try {
+      const stored = localStorage.getItem("calendarNotes");
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  });
+
   const [currentDate, setCurrentDate] = useState(new Date(2022, 0, 1));
   const [range, setRange] = useState({ start: null, end: null });
-  const [savedNotes, setSavedNotes] = useState({}); // {dateKey: {text: "", recurring: false}}
   const [noteText, setNoteText] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -49,6 +58,15 @@ export default function PerfectWallCalendar() {
   const [noteHistory, setNoteHistory] = useState([]);
   const [isRecurring, setIsRecurring] = useState(false);
   const isDark = theme === "dark";
+
+  // LocalStorage: Save notes whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem("calendarNotes", JSON.stringify(savedNotes));
+    } catch (error) {
+      console.error("Failed to save notes to localStorage:", error);
+    }
+  }, [savedNotes]);
 
   const holidays = useMemo(() => {
     const year = format(currentDate, "yyyy");
@@ -176,7 +194,6 @@ export default function PerfectWallCalendar() {
         <div className="relative h-[250px] md:h-[420px] w-full overflow-hidden">
           <AnimatePresence mode="popLayout">
             <motion.img
-              // Combined key ensures animation triggers on both month change AND image upload
               key={`${heroImageUrl || "default"}-${format(currentDate, "yyyy-MM")}`}
               src={
                 heroImageUrl ||
@@ -200,7 +217,6 @@ export default function PerfectWallCalendar() {
             />
           )}
 
-          {/* Animating Month/Year Text */}
           <div className="absolute bottom-4 right-4 md:bottom-10 md:right-10 text-right text-white z-20">
             <AnimatePresence mode="wait">
               <motion.div
@@ -333,7 +349,9 @@ export default function PerfectWallCalendar() {
                 const isSel = range.start && isSameDay(day, range.start);
                 const isEnd = range.end && isSameDay(day, range.end);
 
-                // Enhanced Range Contrast for Light Mode
+                // Note Indicator: Check if this date has a saved note
+                const hasNote = savedNotes[dateKey]?.text?.trim().length > 0;
+
                 const inRange =
                   range.start &&
                   range.end &&
@@ -369,6 +387,19 @@ export default function PerfectWallCalendar() {
                     >
                       {format(day, "d")}
                     </span>
+
+                    {/* Note Indicator Dot - positioned at bottom */}
+                    {hasNote && isCurrMonth && (
+                      <div
+                        className={`absolute bottom-0.5 md:bottom-1 w-1 h-1 rounded-full ${
+                          isSel || isEnd
+                            ? "bg-white"
+                            : isDark
+                              ? "bg-blue-400"
+                              : "bg-blue-600"
+                        }`}
+                      />
+                    )}
                   </button>
                 );
               })}
