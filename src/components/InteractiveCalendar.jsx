@@ -350,7 +350,7 @@ export default function PerfectWallCalendar() {
                     onClick={() => handleDateClick(day)}
                     className={`relative h-10 md:h-11 flex items-center justify-center text-xs md:text-sm font-medium transition-all
                       ${!isCurrMonth ? (isDark ? "text-slate-700" : "text-gray-300") : isSunday ? "text-rose-600" : isDark ? "text-slate-300" : "text-gray-700"}
-                      ${inRange ? (isDark ? "bg-blue-600/40" : "bg-blue-100/70") : ""}
+                      ${inRange ? (isDark ? "bg-blue-500/70" : "bg-blue-200") : ""}
                       ${isSunday && isCurrMonth && !isSel && !isEnd ? (isDark ? "bg-red-900/20" : "bg-red-50") : ""}
                       ${isSel || isEnd ? "bg-[#2196f3] !text-white z-10 shadow-lg shadow-blue-500/40 rounded-lg scale-110" : isDark ? "hover:bg-slate-800" : "hover:bg-gray-100 rounded-lg"}
                     `}
