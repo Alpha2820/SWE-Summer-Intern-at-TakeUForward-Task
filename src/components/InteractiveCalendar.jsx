@@ -10,12 +10,6 @@ import {
   Moon,
   Sun,
   Upload,
-  Search,
-  Download,
-  Undo,
-  Redo,
-  Calendar,
-  Eye,
 } from "lucide-react";
 import {
   format,
@@ -29,14 +23,9 @@ import {
   isBefore,
   startOfWeek,
   endOfWeek,
-  startOfYear,
-  endOfYear,
-  eachWeekOfInterval,
-  eachMonthOfInterval,
 } from "date-fns";
 
 export default function PerfectWallCalendar() {
-  // LocalStorage: Load saved notes on mount
   const [savedNotes, setSavedNotes] = useState(() => {
     try {
       const stored = localStorage.getItem("calendarNotes");
@@ -52,14 +41,10 @@ export default function PerfectWallCalendar() {
   const [isSaving, setIsSaving] = useState(false);
   const [theme, setTheme] = useState("light");
   const [heroImageUrl, setHeroImageUrl] = useState("");
-  const [view, setView] = useState("month");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [weatherData, setWeatherData] = useState({});
-  const [noteHistory, setNoteHistory] = useState([]);
   const [isRecurring, setIsRecurring] = useState(false);
+  const [noteHistory, setNoteHistory] = useState([]);
   const isDark = theme === "dark";
 
-  // LocalStorage: Save notes whenever they change
   useEffect(() => {
     try {
       localStorage.setItem("calendarNotes", JSON.stringify(savedNotes));
@@ -95,13 +80,19 @@ export default function PerfectWallCalendar() {
     if (!isWithinInterval(date, { start: monthStart, end: monthEnd })) {
       setCurrentDate(startOfMonth(date));
     }
-    if (!range.start || (range.start && range.end)) {
+
+    const startHasSavedNote =
+      range.start &&
+      savedNotes[format(range.start, "yyyy-MM-dd")]?.text?.trim().length > 0;
+
+    if (!range.start || (range.start && range.end) || startHasSavedNote) {
       setRange({ start: date, end: null });
       setNoteText(savedNotes[key]?.text || "");
       setIsRecurring(savedNotes[key]?.recurring || false);
       setNoteHistory([savedNotes[key]?.text || ""]);
       return;
     }
+
     if (isBefore(date, range.start)) {
       setRange({ start: date, end: null });
       setNoteText(savedNotes[key]?.text || "");
@@ -109,6 +100,7 @@ export default function PerfectWallCalendar() {
       setNoteHistory([savedNotes[key]?.text || ""]);
       return;
     }
+
     setRange({ ...range, end: date });
   };
 
@@ -137,6 +129,9 @@ export default function PerfectWallCalendar() {
         [selectedDateKey]: { text: noteText, recurring: isRecurring },
       }));
       setIsSaving(false);
+      setRange({ start: null, end: null });
+      setNoteText("");
+      setIsRecurring(false);
     }, 500);
   };
 
@@ -146,40 +141,10 @@ export default function PerfectWallCalendar() {
       const { [selectedDateKey]: _, ...rest } = prev;
       return rest;
     });
+    setRange({ start: null, end: null });
     setNoteText("");
     setIsRecurring(false);
   };
-
-  const undoNote = () => {
-    if (noteHistory.length > 1) {
-      const newHistory = [...noteHistory];
-      newHistory.pop();
-      setNoteHistory(newHistory);
-      setNoteText(newHistory[newHistory.length - 1]);
-    }
-  };
-
-  const redoNote = () => {
-    setNoteText(savedNotes[selectedDateKey]?.text || "");
-  };
-
-  const exportCalendar = () => {
-    const element = document.querySelector(".calendar-container");
-    html2canvas(element).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = "calendar.png";
-      link.href = canvas.toDataURL();
-      link.click();
-    });
-  };
-
-  const fetchWeather = async () => {
-    setWeatherData({ temp: 22, condition: "Sunny" });
-  };
-
-  useEffect(() => {
-    fetchWeather();
-  }, []);
 
   return (
     <div
@@ -190,7 +155,7 @@ export default function PerfectWallCalendar() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        {/* --- HERO SECTION --- */}
+        {/* HERO SECTION */}
         <div className="relative h-[250px] md:h-[420px] w-full overflow-hidden">
           <AnimatePresence mode="popLayout">
             <motion.img
@@ -266,7 +231,7 @@ export default function PerfectWallCalendar() {
           </div>
         </div>
 
-        {/* --- CALENDAR BODY --- */}
+        {/* CALENDAR BODY */}
         <div
           className={`flex flex-col md:grid md:grid-cols-12 pt-6 pb-8 md:pb-12 px-4 md:px-8 transition-colors duration-500 ${isDark ? "bg-slate-900" : "bg-white"}`}
         >
@@ -294,6 +259,15 @@ export default function PerfectWallCalendar() {
               </div>
             </div>
 
+            {/* Selected date label */}
+            {selectedDateKey && (
+              <p
+                className={`text-xs mb-2 px-1 font-medium ${isDark ? "text-blue-400" : "text-blue-600"}`}
+              >
+                📅 {format(range.start, "dd MMMM yyyy")}
+              </p>
+            )}
+
             <textarea
               value={noteText}
               onChange={(e) => setNoteText(e.target.value)}
@@ -303,14 +277,23 @@ export default function PerfectWallCalendar() {
                   ? "Write your plan here..."
                   : "Select a date to enable notes"
               }
-              className={`w-full min-h-[120px] md:min-h-[260px] rounded-2xl md:rounded-3xl border px-4 py-4 text-sm resize-none outline-none transition-all ${
+              className={`w-full min-h-[120px] md:min-h-[220px] rounded-2xl md:rounded-3xl border px-4 py-4 text-sm resize-none outline-none transition-all ${
                 isDark
                   ? "border-slate-700 bg-slate-950 text-slate-100 focus:border-blue-500"
                   : "border-gray-200 bg-gray-50 text-gray-700 focus:border-blue-400"
               }`}
             />
 
-            <div className="mt-4 grid grid-cols-2 gap-2 md:gap-3">
+            {/* Character counter */}
+            {selectedDateKey && (
+              <p
+                className={`text-[10px] text-right mt-1 px-1 ${isDark ? "text-slate-500" : "text-gray-400"}`}
+              >
+                {noteText.length} / 300
+              </p>
+            )}
+
+            <div className="mt-3 grid grid-cols-2 gap-2 md:gap-3">
               <button
                 onClick={saveNote}
                 disabled={!selectedDateKey || isSaving}
@@ -348,15 +331,14 @@ export default function PerfectWallCalendar() {
                 const isSunday = day.getDay() === 0;
                 const isSel = range.start && isSameDay(day, range.start);
                 const isEnd = range.end && isSameDay(day, range.end);
-
-                // Note Indicator: Check if this date has a saved note
                 const hasNote = savedNotes[dateKey]?.text?.trim().length > 0;
-
                 const inRange =
                   range.start &&
                   range.end &&
-                  isWithinInterval(day, { start: range.start, end: range.end });
-
+                  isWithinInterval(day, {
+                    start: range.start,
+                    end: range.end,
+                  });
                 const isCurrMonth = isWithinInterval(day, {
                   start: monthStart,
                   end: monthEnd,
@@ -388,7 +370,6 @@ export default function PerfectWallCalendar() {
                       {format(day, "d")}
                     </span>
 
-                    {/* Note Indicator Dot - positioned at bottom */}
                     {hasNote && isCurrMonth && (
                       <div
                         className={`absolute bottom-0.5 md:bottom-1 w-1 h-1 rounded-full ${
@@ -404,6 +385,45 @@ export default function PerfectWallCalendar() {
                 );
               })}
             </div>
+
+            {/* Notes summary list */}
+            {Object.keys(savedNotes).length > 0 && (
+              <div
+                className={`mt-6 rounded-2xl p-3 ${isDark ? "bg-slate-800" : "bg-gray-50"}`}
+              >
+                <p
+                  className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${isDark ? "text-slate-400" : "text-gray-400"}`}
+                >
+                  Saved Notes
+                </p>
+                <div className="flex flex-col gap-1 max-h-[100px] overflow-y-auto">
+                  {Object.entries(savedNotes)
+                    .filter(([, v]) => v?.text?.trim())
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([key, val]) => (
+                      <button
+                        key={key}
+                        onClick={() => {
+                          const d = new Date(key + "T00:00:00");
+                          setCurrentDate(startOfMonth(d));
+                          setRange({ start: d, end: null });
+                          setNoteText(val.text);
+                          setIsRecurring(val.recurring || false);
+                          setNoteHistory([val.text]);
+                        }}
+                        className={`text-left text-[11px] px-2 py-1 rounded-lg truncate transition-all ${isDark ? "text-slate-300 hover:bg-slate-700" : "text-gray-600 hover:bg-gray-200"}`}
+                      >
+                        <span
+                          className={`font-bold mr-2 ${isDark ? "text-blue-400" : "text-blue-600"}`}
+                        >
+                          {key}
+                        </span>
+                        {val.text}
+                      </button>
+                    ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </motion.div>
