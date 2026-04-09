@@ -1,166 +1,185 @@
 # 🗓️ Perfect Wall Calendar — React
 
-A **premium, feature-rich interactive wall calendar** built with **React**, combining beautiful visual design with real productivity tools including **AI-powered daily planning, mood tracking, streak system, and more**.
+A **premium, feature-rich interactive calendar** built with **React**, designed to combine **beautiful UI** with powerful productivity tools like **AI-powered planning, mood tracking, and streak management**.
 
 ---
 
-## ✨ Live Preview
+## 🚀 Live Highlights
 
-- 🖼️ Dynamic Hero with chevron/diagonal photo layout
-- 🤖 AI Daily Planner (powered by Claude AI)
-- 😊 Mood Journal with calendar ring indicators
-- 📊 Monthly Stats & Streak Tracker
-- 🎨 6 Themes × 5 Fonts × 6 Backgrounds
-- 🔥 Animated confetti on save
-- 📅 Interactive calendar with note density heatmap
+- 🖼️ Elegant **Hero Section** with diagonal layout
+- 🤖 **AI Daily Planner** (Claude AI integration)
+- 😊 **Mood Tracking System**
+- 📊 **Monthly Analytics & Streak Tracker**
+- 🎨 Fully customizable (**Themes, Fonts, Backgrounds**)
+- 🔥 Confetti animations on actions
+- 📅 Smart calendar with **note density heatmap**
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-### 📆 Calendar Functionality
+### 📆 Calendar System
 
-- Monthly calendar view with accurate date generation via **date-fns**
-- Previous / Next month navigation with **3D page-flip animation**
-- Today button — jumps to current month instantly
-- Today's date always highlighted with an accent border ring
-- Selected date highlight with scale animation + shadow
-- Date range selection
-- Sunday & public holiday highlighting
-- Dates outside current month shown as muted
+- Dynamic monthly calendar powered by **date-fns**
+- Smooth **3D page-flip animation** for navigation
+- Highlight:
+  - **Today’s date**
+  - **Selected date**
+  - **Holidays & Sundays**
+
+- Date range selection support
+- Muted styling for non-current month dates
+
+---
 
 ### 📝 Notes System
 
-- Add, edit, and delete notes per date
-- Notes persist across sessions via **localStorage**
-- Note indicator dot shown on calendar dates
-- Saved notes list panel — click any to jump to that date
-- Character counter (0 / 300)
-- Selected date label shown above textarea
+- Create, edit, delete notes for any date
+- Persistent storage via **localStorage**
+- Visual indicators on calendar
+- Notes panel with quick navigation
+- Character limit: **300 chars**
+
+---
 
 ### 🤖 AI Daily Planner
 
-- Select any date and click **"AI Plan"**
-- Describe your day in one line
-- Claude AI generates a structured **Morning / Afternoon / Evening** plan
-- One-click **"Use This Plan"** pastes it directly into the note
+- Generate structured plans:
+  - 🌅 Morning
+  - 🌇 Afternoon
+  - 🌙 Evening
+
+- Powered by **Claude AI API**
+- One-click insert into notes
+
+---
 
 ### ⚡ Quick Templates
 
-- Click **"Templates"** above the textarea when a date is selected
-- 5 built-in templates:
-  - 📋 Daily Standup
-  - 💪 Workout Log
-  - 🍽️ Meal Plan
-  - 📓 Journal Prompt
-  - 📚 Study Plan
+Pre-built templates for productivity:
+
+- 📋 Daily Standup
+- 💪 Workout Log
+- 🍽️ Meal Plan
+- 📓 Journal Prompt
+- 📚 Study Plan
+
+---
 
 ### 😊 Mood Journal
 
-- Assign one of 6 moods to any date: 😊 😔 😤 🔥 😴 😌
-- Colored ring around the date on the calendar grid
-- Tiny mood emoji shown in corner of each date cell
-- Moods shown alongside notes in the saved notes list
-- Moods persist via localStorage
+- Track daily emotions with 6 moods:
+  - 😊 😔 😤 🔥 😴 😌
 
-### 📊 Monthly Stats Card
+- Visual ring + emoji indicators
+- Stored persistently
+- Integrated with notes & stats
 
-- Click the bar chart icon in the hero controls
-- Shows for the current month:
-  - Total notes saved
-  - Busiest day of the week
-  - Top mood of the month
-  - Current writing streak
-  - Full mood distribution breakdown
+---
 
-### 🔥 Streak Tracker
+### 📊 Monthly Analytics
 
-- Live **"🔥 X day streak"** badge in the hero
-- Counts consecutive days with saved notes
-- Resets if a day is missed
+- Total notes count
+- Most productive weekday
+- Top mood analysis
+- Streak tracking
+- Mood distribution breakdown
 
-### 🎨 Themes & Customization
+---
 
-- **6 color themes**: Light, Dark, Forest, Ocean, Sunset, Lavender
-- **5 fonts**: Default, Serif, Mono, Rounded, Elegant
-- **6 hero backgrounds**: Photo, Gradient 1, Gradient 2, Gradient 3, Pattern, Mesh
-- Upload your own custom hero photo
-- All pickers accessible from glassmorphism buttons in the hero
+### 🔥 Streak System
 
-### 🖼️ Hero Design
+- Tracks **daily consistency**
+- Displays: `🔥 X day streak`
+- Resets automatically on missed days
 
-- Diagonal chevron photo layout (left shape + right shape with month label)
-- Smooth **3D rotateY page-flip** animation between months
-- Month and year text overlaid on the right chevron shape
-- Gradient + polygon overlay blends seamlessly when using default photo
+---
 
-### 📈 Note Density Heatmap
+### 🎨 Customization
 
-- GitHub-style heatmap showing all 12 months of the year
-- Blue dot for every date that has a saved note
-- Toggle with "Show / Hide Heatmap" button
+- **Themes**: Light, Dark, Forest, Ocean, Sunset, Lavender
+- **Fonts**: Default, Serif, Mono, Rounded, Elegant
+- **Backgrounds**: Gradients, Mesh, Patterns, Custom Upload
 
-### 🎊 Confetti
+---
 
-- 60-piece animated confetti burst every time you save a note
+### 🖼️ UI & Animations
+
+- Glassmorphism controls
+- Smooth transitions via **Framer Motion**
+- 3D effects & hover interactions
+
+---
+
+### 📈 Heatmap Visualization
+
+- GitHub-style yearly heatmap
+- Shows note activity across all months
+
+---
+
+### 🎊 Micro Interactions
+
+- Confetti animation on save
+- Smooth scaling, hover, and motion effects
+
+---
 
 ### 📱 Responsive Design
 
-- Fully responsive across mobile, tablet, and desktop
-- Notes panel stacks above calendar on mobile
-- Hero height, fonts, buttons, and padding all scale with screen size
-- Dropdown menus adjust position to prevent overflow on small screens
+- Fully optimized for:
+  - Mobile 📱
+  - Tablet 📲
+  - Desktop 💻
+
+- Adaptive layout & typography
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology    | Usage                         |
-| ------------- | ----------------------------- |
-| React.js      | UI Development                |
-| date-fns      | Date utilities & calculations |
-| Framer Motion | Animations & transitions      |
-| Lucide React  | Icons                         |
-| Claude AI API | AI Daily Planner              |
-| localStorage  | Persistent notes & mood data  |
-| CSS-in-JS     | All styling via inline styles |
+| Technology    | Purpose           |
+| ------------- | ----------------- |
+| React.js      | Frontend UI       |
+| date-fns      | Date calculations |
+| Framer Motion | Animations        |
+| Lucide React  | Icons             |
+| Claude AI API | AI planning       |
+| localStorage  | Data persistence  |
+| CSS-in-JS     | Styling           |
 
 ---
 
 ## 📂 Project Structure
 
-````text
+```
 src/
 ├── components/
-│   └── PerfectWallCalendar.jsx  # Main component (all-in-one)
+│   └── PerfectWallCalendar.jsx
 ├── App.jsx
 ├── main.jsx
 └── index.css
+```
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup & Installation
 
-### 1️⃣ Clone the repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/your-username/perfect-wall-calendar.git
 cd perfect-wall-calendar
-````
+```
 
-### 2️⃣ Install dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
-```
-
-### 3️⃣ Install required packages
-
-```bash
 npm install framer-motion lucide-react date-fns
 ```
 
-### 4️⃣ Run the project
+### 3. Run Project
 
 ```bash
 npm run dev
@@ -168,9 +187,9 @@ npm run dev
 
 ---
 
-## 🧠 Core Logic
+## 🧠 Core Implementation
 
-**Date generation:**
+### Date Generation
 
 ```js
 eachDayOfInterval({
@@ -179,79 +198,63 @@ eachDayOfInterval({
 });
 ```
 
-**Note & mood storage:**
+### Data Storage
 
 ```js
-// Both keyed by date string
-"yyyy-MM-dd" → { text: string, recurring: boolean }
+"yyyy-MM-dd" → { text: string }
 "yyyy-MM-dd" → "😊"
 ```
 
-**Streak calculation:**
+### Streak Logic
 
-```js
-// Walks backwards from today
-// Breaks on first missing note
-```
+- Iterates backward from today
+- Stops at first missing entry
 
-**AI Planner API call:**
+### AI API Call
 
-```js
+```http
 POST https://api.anthropic.com/v1/messages
-model: "claude-sonnet-4-20250514"
-// Prompt includes date + user's one-line description
-// Returns structured Morning / Afternoon / Evening plan
-```
-
-**Range selection logic:**
-
-```js
-// First click → sets range.start
-// Second click → sets range.end (if no saved note on start date)
-// If start date already has a saved note → always starts fresh
+model: claude-sonnet-4
 ```
 
 ---
 
-## 🎯 Key Highlights
+## 🎯 Why This Project Stands Out
 
-- 💎 **Portfolio-ready premium UI design**
-- 🤖 **Real AI integration — not just a mock**
-- 🔥 **Streak system keeps users engaged daily**
-- 😊 **Mood journaling adds emotional context to every day**
-- ⚡ **Zero backend — fully client-side with localStorage**
-- 📱 **Pixel-perfect responsive across all screen sizes**
-- 🧩 **Single-file component — easy to drop into any React project**
+- 💎 **Premium UI (Portfolio Ready)**
+- 🤖 **Real AI Integration**
+- ⚡ **No Backend Required**
+- 📊 **Productivity + Emotional Tracking**
+- 🔥 **Engagement-driven features (streaks, stats)**
 
 ---
 
-## 🔮 Future Improvements
+## 🔮 Future Enhancements
 
-- 🌐 Backend integration (MongoDB / Firebase) for cloud sync
-- 🔐 Authentication — personal calendars per user
-- 🗓️ Week & Year view
-- 🔔 Browser notifications & reminders
-- 🌦️ Real-time weather API per date
-- 📅 Google Calendar / iCal sync
-- 📸 Export calendar month as PNG image
-- 🖨️ Print-friendly layout
+- 🌐 Backend (MongoDB / Firebase)
+- 🔐 Authentication system
+- 🗓️ Weekly & yearly views
+- 🔔 Notifications & reminders
+- 🌦️ Weather integration
+- 🔗 Google Calendar sync
+- 📸 Export as image / PDF
 
 ---
 
 ## 🙌 Contributing
 
-Contributions are welcome!
-
+```bash
 1. Fork the repo
-2. Create a new branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m "Add your feature"`
-4. Push and submit a Pull Request
+2. Create branch → feature/your-feature
+3. Commit changes
+4. Open Pull Request
+```
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License**.
+MIT License
 
 ---
 
@@ -263,8 +266,10 @@ This project is licensed under the **MIT License**.
 
 ## ⭐ Support
 
-If you like this project:
+If you found this helpful:
 
-👉 Star the repo  
-👉 Share with others  
-👉 Use it in your portfolio
+- ⭐ Star the repository
+- 🔁 Share with others
+- 💼 Add it to your portfolio
+
+---
