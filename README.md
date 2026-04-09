@@ -128,3 +128,144 @@ A **premium, feature-rich interactive wall calendar** built with **React**, comb
 ---
 
 ## 📂 Project Structure
+
+src/
+│
+├── components/
+│ └── PerfectWallCalendar.jsx ← Main component (all-in-one)
+│
+├── App.jsx
+├── main.jsx
+└── index.css
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/your-username/perfect-wall-calendar.git
+cd perfect-wall-calendar
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Install required packages
+
+```bash
+npm install framer-motion lucide-react date-fns
+```
+
+### 4️⃣ Run the project
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧠 Core Logic
+
+**Date generation:**
+
+```js
+eachDayOfInterval({
+  start: startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 }),
+  end: endOfWeek(endOfMonth(currentDate), { weekStartsOn: 1 }),
+});
+```
+
+**Note & mood storage:**
+
+```js
+// Both keyed by date string
+"yyyy-MM-dd" → { text: string, recurring: boolean }
+"yyyy-MM-dd" → "😊"
+```
+
+**Streak calculation:**
+
+```js
+// Walks backwards from today
+// Breaks on first missing note
+```
+
+**AI Planner API call:**
+
+```js
+POST https://api.anthropic.com/v1/messages
+model: "claude-sonnet-4-20250514"
+// Prompt includes date + user's one-line description
+// Returns structured Morning / Afternoon / Evening plan
+```
+
+**Range selection logic:**
+
+```js
+// First click → sets range.start
+// Second click → sets range.end (if no saved note on start date)
+// If start date already has a saved note → always starts fresh
+```
+
+---
+
+## 🎯 Key Highlights
+
+- 💎 **Portfolio-ready premium UI design**
+- 🤖 **Real AI integration — not just a mock**
+- 🔥 **Streak system keeps users engaged daily**
+- 😊 **Mood journaling adds emotional context to every day**
+- ⚡ **Zero backend — fully client-side with localStorage**
+- 📱 **Pixel-perfect responsive across all screen sizes**
+- 🧩 **Single-file component — easy to drop into any React project**
+
+---
+
+## 🔮 Future Improvements
+
+- 🌐 Backend integration (MongoDB / Firebase) for cloud sync
+- 🔐 Authentication — personal calendars per user
+- 🗓️ Week & Year view
+- 🔔 Browser notifications & reminders
+- 🌦️ Real-time weather API per date
+- 📅 Google Calendar / iCal sync
+- 📸 Export calendar month as PNG image
+- 🖨️ Print-friendly layout
+
+---
+
+## 🙌 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo
+2. Create a new branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "Add your feature"`
+4. Push and submit a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+**Abhijeet Tiwari**
+
+---
+
+## ⭐ Support
+
+If you like this project:
+
+👉 Star the repo  
+👉 Share with others  
+👉 Use it in your portfolio
