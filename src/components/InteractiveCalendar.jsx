@@ -573,7 +573,7 @@ export default function PerfectWallCalendar() {
                     height: isMobile ? 90 : 160,
                     background: t.heroOverlay,
                     clipPath:
-                      "polygon(0 55%, 35% 85%, 50% 55%, 100% 90%, 100% 100%, 0 100%)",
+                      "polygon(0 60%, 15% 72%, 30% 82%, 45% 72%, 60% 65%, 75% 78%, 90% 68%, 100% 75%, 100% 100%, 0 100%)",
                     zIndex: 10,
                   }}
                 />
