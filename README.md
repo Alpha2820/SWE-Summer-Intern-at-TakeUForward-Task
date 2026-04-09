@@ -129,11 +129,10 @@ A **premium, feature-rich interactive wall calendar** built with **React**, comb
 
 ## 📂 Project Structure
 
+````text
 src/
-│
 ├── components/
-│ └── PerfectWallCalendar.jsx ← Main component (all-in-one)
-│
+│   └── PerfectWallCalendar.jsx  # Main component (all-in-one)
 ├── App.jsx
 ├── main.jsx
 └── index.css
@@ -147,7 +146,7 @@ src/
 ```bash
 git clone https://github.com/your-username/perfect-wall-calendar.git
 cd perfect-wall-calendar
-```
+````
 
 ### 2️⃣ Install dependencies
 
